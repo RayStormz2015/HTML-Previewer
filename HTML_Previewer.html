@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF 8">
+<title>HTML Previewer</title>
+</head>
+<body>
+<h2>Upload a html file to preview</h2>
+<input type="file" id="fileInput" accept=".html" />
+<iframe id="previewFrame" style="width:100%; height:500px; border:1px solid #ccc; text-align:center;"></iframe>
+<script>
+const fileInput = document.getElementById('fileInput');
+const previewFrame = document.getElementById('previewFrame');
+fileInput.addEventListener('change', () => {
+const file = fileInput.files[0];
+if (file && file.type === "text/html") {
+const reader = new FileReader();
+reader.onload = () => {
+const blob = new Blob([reader.result], { type: 'text/html'});
+previewFrame.src = URL.createObjectURL(blob);
+};
+reader.readAsText(file);
+} else {
+alert("Please Upload A Valid HTML File");
+}
+});
+</script>
+</body>
+</html>
